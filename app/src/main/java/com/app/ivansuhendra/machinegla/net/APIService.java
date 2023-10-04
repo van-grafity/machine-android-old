@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 
 public interface APIService {
-    @GET("cutting-orders")
-    Call<APIResponse> getCuttingOrder(@Header("Authorization") String authorization);
+    @GET("cutting-record-remark")
+    Call<APIResponse> getRemarks();
 }
