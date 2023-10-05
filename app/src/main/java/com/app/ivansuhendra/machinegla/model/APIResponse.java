@@ -1,11 +1,11 @@
 package com.app.ivansuhendra.machinegla.model;
 
 public class APIResponse {
-    private int status;
+    private boolean status;
     private String message;
     private APIModels data;
 
-    public int getStatus() {
+    public boolean isStatus() {
         return status;
     }
 

@@ -101,7 +101,7 @@ public class API {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .client(client)
-                    .baseUrl("http://192.168.5.120" + "/api/")
+                    .baseUrl("http://192.168.5.236/machine-app/public" + "/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 

@@ -17,9 +17,9 @@ public class MachineRepository {
         this.mContext = context;
     }
 
-    public LiveData<APIResponse> getRemarksResponse() {
+    public LiveData<APIResponse> getMachineResponse(int limit, int page) {
         final MutableLiveData<APIResponse> mutableLiveData = new MutableLiveData<>();
-        API.service().getRemarks().enqueue(new APICallback<APIResponse>(mContext) {
+        API.service().getMachine(limit, page).enqueue(new APICallback<APIResponse>(mContext) {
             @Override
             protected void onSuccess(APIResponse apiResponse) {
                 mutableLiveData.setValue(apiResponse);

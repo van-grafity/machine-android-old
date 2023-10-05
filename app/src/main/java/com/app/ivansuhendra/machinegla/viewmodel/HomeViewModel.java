@@ -27,8 +27,8 @@ public class HomeViewModel extends ViewModel {
         return mText;
     }
 
-    public LiveData<APIResponse> getRemarksLiveData() {
-        machineResponseData = machineRepository.getRemarksResponse();
+    public LiveData<APIResponse> getMachinesLiveData(int limit, int page) {
+        machineResponseData = machineRepository.getMachineResponse(limit, page);
         return machineResponseData;
     }
 }

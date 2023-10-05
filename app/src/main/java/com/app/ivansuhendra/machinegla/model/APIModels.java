@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class APIModels {
-    @SerializedName("cutting_record_remark")
-    private ArrayList<CuttingRecordRemark> cuttingRecordRemarks;
+    @SerializedName("machines")
+    private ArrayList<Machine> machines;
 
-    public ArrayList<CuttingRecordRemark> getCuttingRecordRemarks() {
-        return cuttingRecordRemarks;
+    public ArrayList<Machine> getMachines() {
+        return machines;
     }
 }

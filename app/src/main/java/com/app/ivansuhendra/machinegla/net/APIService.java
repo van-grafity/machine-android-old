@@ -5,8 +5,9 @@ import com.app.ivansuhendra.machinegla.model.APIResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Query;
 
 public interface APIService {
-    @GET("cutting-record-remark")
-    Call<APIResponse> getRemarks();
+    @GET("machine")
+    Call<APIResponse> getMachine(@Query("limit") int limit, @Query("offset") int page);
 }

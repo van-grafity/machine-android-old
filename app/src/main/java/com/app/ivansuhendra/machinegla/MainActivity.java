@@ -1,6 +1,7 @@
 package com.app.ivansuhendra.machinegla;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,49 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    super.run();
-                    sleep(1000);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                } finally {
-                    if (Build.VERSION.SDK_INT > 22) {
-                        Dexter.withActivity(MainActivity.this)
-                                .withPermissions(
-                                        Manifest.permission.CAMERA,
-                                        Manifest.permission.READ_CONTACTS,
-                                        Manifest.permission.READ_SMS,
-                                        Manifest.permission.RECEIVE_SMS,
-                                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                                        Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION
-
-                                ).withListener(new MultiplePermissionsListener() {
-                                    @Override
-                                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-//                                        next();
-                                    }
-
-                                    @Override
-                                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                                        token.continuePermissionRequest();
-                                    }
-                                }).check();
-
-                    } else {
-//                        next();
-                    }
-                }
-            }
-        }.start();
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        binding.appBarMain.fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ScanQrActivity.class));
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
