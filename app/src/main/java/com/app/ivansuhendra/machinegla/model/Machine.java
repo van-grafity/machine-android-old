@@ -3,6 +3,7 @@ package com.app.ivansuhendra.machinegla.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Machine {
+    private int id;
     private String model;
     @SerializedName("serial_number")
     private String serialNumber;
@@ -15,6 +16,10 @@ public class Machine {
     public Machine(String model, String serialNumber) {
         this.model = model;
         this.serialNumber = serialNumber;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getModel() {

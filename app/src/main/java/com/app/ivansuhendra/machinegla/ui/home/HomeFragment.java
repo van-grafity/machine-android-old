@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -107,17 +108,65 @@ public class HomeFragment extends Fragment {
         machines.add(new Machine("Automatic Placket Machine", "KAL"));
         machines.add(new Machine("Bartack", "Brother"));
         machines.add(new Machine("Round Knife Cutter", "Su Lee"));
-        machineAdapter.setItems(machines);
-        binding.rvMachine.setAdapter(machineAdapter);
+        // machineAdapter.setItems(machines);
+        // binding.rvMachine.setAdapter(machineAdapter);
         loadDataMachines();
         return root;
     }
 
-    private void loadDataMachines() {
-        homeViewModel.getMachinesLiveData(50, 2).observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+//    private void loadDataMachines() {
+//        homeViewModel.getMachinesLiveData(50, 2).observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+//            @Override
+//            public void onChanged(APIResponse apiResponse) {
+//                Log.i(TAG, "onChanged: resx " + apiResponse.getData().getMachines().get(0).getMachineType().getName());
+//                machineAdapter.setItems(apiResponse.getData().getMachines());
+//                binding.rvMachine.setAdapter(machineAdapter);
+//            }
+//        });
+//    }
+
+//     public class HomeViewModel extends ViewModel {
+
+//     private MutableLiveData<String> mText;
+//     private LiveData<APIResponse> machineResponseData;
+//     private MachineRepository machineRepository;
+//     private LiveData<PagedList<Machine>> pagedListLiveData;
+//     MachineDataSourceFactory machineDataSourceFactory;
+
+//     public HomeViewModel() {
+//         Context context = new Activity();
+//         machineRepository = new MachineRepository(context);
+//         mText = new MutableLiveData<>();
+//         mText.setValue("This is home fragment");
+
+//         machineDataSourceFactory = new MachineDataSourceFactory(machineRepository);
+//         PagedList.Config config = (new PagedList.Config.Builder())
+//                 .setEnablePlaceholders(false)
+//                 .setPageSize(10)
+//                 .build();
+//         pagedListLiveData = (new LivePagedListBuilder(machineDataSourceFactory, config)).build();
+//     }
+
+//     public LiveData<String> getText() {
+//         return mText;
+//     }
+
+//     public LiveData<APIResponse> getMachinesLiveData(int limit, int page) {
+//         machineResponseData = machineRepository.getMachineResponse(limit, page);
+//         return machineResponseData;
+//     }
+
+//     public LiveData<PagedList<Machine>> getPagedListLiveData() {
+//         return pagedListLiveData;
+//     }
+// }
+
+    public void loadDataMachines() {
+        homeViewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Machine>>() {
             @Override
-            public void onChanged(APIResponse apiResponse) {
-                Log.i(TAG, "onChanged: resx " + apiResponse.getData().getMachines().get(0).getMachineType().getName());
+            public void onChanged(PagedList<Machine> machines) {
+                machineAdapter.submitList(machines);
+                binding.rvMachine.setAdapter(machineAdapter);
             }
         });
     }
